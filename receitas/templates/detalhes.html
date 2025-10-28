@@ -1,0 +1,58 @@
+{% load static %}
+ 
+<h1>{{ receita.nome }}</h1>
+<p><strong>Categoria:</strong> {{ receita.categoria }}</p>
+<p><strong>Ingredientes:</strong><br>{{ receita.ingredientes|linebreaks }}</p>
+<p><strong>Modo de preparo:</strong><br>{{ receita.modo_preparo|linebreaks }}</p>
+{% if receita.imagem %}
+    <img src="{{ receita.imagem.url }}" width="300">
+{% endif %}
+<a href="{% url 'receitas:lista' %}">Voltar</a>
+
+<style>
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #fffaf4;
+            color: #333;
+            margin: 40px auto;
+            max-width: 700px;
+            padding: 20px;
+            line-height: 1.6;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        h1 {
+            text-align: center;
+            color: #d2691e;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        strong {
+            color: #b34700;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #d2691e;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+        a:hover {
+            background-color: #b85c16;
+        }
+
+
+</style>
