@@ -1,9 +1,95 @@
 {% load static %}
 
-<h1>Nova Receita</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-</form>
-<a href="{% url 'receitas:lista' %}">Voltar</a>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom right, #fff3e0, #f0f2f5);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: #ffffffcc;
+    backdrop-filter: blur(6px);
+    border-radius: 15px;
+    padding: 30px 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #f28c28;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form input[type="text"],
+form input[type="file"],
+form textarea,
+form select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #f29e4c;
+    box-shadow: 0 0 5px rgba(242, 158, 76, 0.5);
+    outline: none;
+}
+
+button[type="submit"] {
+    background-color: #f29e4c;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #d17c30;
+    transform: scale(1.05);
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #f28c28;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #d17c30;
+    text-decoration: underline;
+}
+</style>
+
+<div class="container">
+    <h1>Nova Receita</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="{% url 'receitas:lista' %}">Voltar</a>
+</div>
