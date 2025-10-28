@@ -4,11 +4,11 @@ from .forms import ReceitaForm
 
 def listar_receitas(request):
     receitas = Receita.objects.all()
-    return render(request, 'receitas/lista.html', {'receitas': receitas})
+    return render(request, 'lista.html', {'receitas': receitas})
 
 def detalhe_receita(request, id):
     receita = get_object_or_404(Receita, id=id)
-    return render(request, 'receitas/detalhe.html', {'receita': receita})
+    return render(request, 'detalhes.html', {'receita': receita})
 
 def nova_receita(request):
     if request.method == 'POST':
@@ -18,4 +18,4 @@ def nova_receita(request):
             return redirect('receitas:lista')
     else:
         form = ReceitaForm()
-    return render(request, 'receitas/nova_receita.html', {'form': form})
+    return render(request, 'nova_receita.html', {'form': form})

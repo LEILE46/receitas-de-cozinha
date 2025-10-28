@@ -1,0 +1,130 @@
+{% load static %}
+
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom right, #fff3e0, #f0f2f5);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px; /* ligeiramente menor para melhor proporção */
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #f28c28;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+/* Botão de nova receita */
+.button-nova {
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 10px 20px; /* menor padding */
+    background-color: #f29e4c;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.button-nova:hover {
+    background-color: #d17c30;
+    transform: scale(1.05);
+}
+
+/* Grid de cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* cards menores */
+    gap: 20px;
+}
+
+/* Card */
+.card {
+    background-color: #ffffffcc; /* leve transparência */
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 300px; 
+    object-fit: co;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-content {
+    padding: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card a {
+    color: #f28c28;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+.card .categoria {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 10px; /* padding menor */
+    background-color: #ffe0b2;
+    color: #b26900;
+    font-size: 0.8rem; /* fonte menor */
+    border-radius: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+</style>
+
+<div class="container">
+    <h1>Receitas</h1>
+    <a href="{% url 'receitas:nova' %}" class="button-nova">Cadastrar Nova Receita</a>
+
+    <div class="card-grid">
+        {% for r in receitas %}
+        <div class="card">
+            {% if r.imagem %}
+            <img src="{{ r.imagem.url }}" alt="{{ r.nome }}">
+            {% else %}
+            <img src="{% static 'core/img/placeholder.png' %}" alt="Imagem padrão">
+            {% endif %}
+            <div class="card-content">
+                <a href="{% url 'receitas:detalhe' r.id %}">{{ r.nome }}</a>
+                <div class="categoria">{{ r.categoria }}</div>
+            </div>
+        </div>
+        {% empty %}
+        <p>Nenhuma receita cadastrada ainda.</p>
+        {% endfor %}
+    </div>
+</div>
