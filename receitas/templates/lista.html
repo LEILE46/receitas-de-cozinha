@@ -104,10 +104,39 @@ h1 {
     letter-spacing: 0.5px;
     text-align: center;
 }
+.filtro-categoria {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.filtro-categoria select {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.filtro-categoria select:focus {
+    border-color: #f29e4c;
+    box-shadow: 0 0 5px rgba(242, 158, 76, 0.5);
+    outline: none;
+}
 </style>
 
 <div class="container">
     <h1>Receitas</h1>
+
+    <!-- Filtro por Categoria -->
+    <form method="get" class="filtro-categoria">
+        <select name="categoria" onchange="this.form.submit()">
+            <option value="">Todas as categorias</option>
+            {% for cat in categorias %}
+            <option value="{{ cat }}" {% if request.GET.categoria == cat %}selected{% endif %}>{{ cat }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
     <a href="{% url 'receitas:nova' %}" class="button-nova">Cadastrar Nova Receita</a>
 
     <div class="card-grid">

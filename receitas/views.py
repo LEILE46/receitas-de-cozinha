@@ -3,8 +3,19 @@ from .models import Receita
 from .forms import ReceitaForm
 
 def listar_receitas(request):
-    receitas = Receita.objects.all()
-    return render(request, 'lista.html', {'receitas': receitas})
+    categoria = request.GET.get('categoria')
+    if categoria:
+        receitas = Receita.objects.filter(categoria=categoria)
+    else:
+        receitas = Receita.objects.all()
+    
+    categorias = Receita.objects.values_list('categoria', flat=True).distinct()
+    
+    context = {
+        'receitas': receitas,
+        'categorias': categorias
+    }
+    return render(request, 'lista.html', context)
 
 def detalhe_receita(request, id):
     receita = get_object_or_404(Receita, id=id)
