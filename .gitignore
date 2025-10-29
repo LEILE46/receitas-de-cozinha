@@ -20,7 +20,6 @@ local_settings.py
 db.sqlite3
 
 # Diretórios de mídia e estáticos gerados
-media/
 staticfiles/
 
 # Relatórios de cobertura de testes
