@@ -30,3 +30,12 @@ def nova_receita(request):
     else:
         form = ReceitaForm()
     return render(request, 'nova_receita.html', {'form': form})
+def excluir_receita(request, id):
+    receita = get_object_or_404(Receita, id=id)
+
+    if request.method == 'POST':
+        receita.delete()
+        return redirect('receitas:lista') 
+
+
+    return redirect('receitas:detalhe', id=id)

@@ -10,7 +10,17 @@
     <img src="{{ receita.imagem.url }}" width="300">
 {% endif %}
 <a href="{% url 'receitas:lista' %}">Voltar</a>
-
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'receitas:excluir' receita.id %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit"
+            onclick="return confirm('Tem certeza que deseja excluir esta receita?');"
+            style="background-color: red; color: white; border: none; padding: 10px 18px;
+                   border-radius: 5px; cursor: pointer; margin-top: 10px;">
+        Excluir Receita
+    </button>
+</form>
+{% endif %}
 <style>
 
         body {
@@ -54,6 +64,18 @@
         }
         a:hover {
             background-color: #b85c16;
+        }
+        button.delete-btn {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button.delete-btn:hover {
+            background-color: #c9302c;
         }
 
 
