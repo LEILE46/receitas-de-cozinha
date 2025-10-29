@@ -6,6 +6,15 @@ class Receita(models.Model):
         ('Doce', 'Doce'),
         ('Principal', 'Prato Principal'),
         ('Salada', 'Salada'),
+        ('Lanche', 'Lanche'),
+        ('Bebida', 'Bebida'),
+        ('Molho', 'Molho'),
+        ('Acompanhamento', 'Acompanhamento'),
+        ('Café da Manhã', 'Café da Manhã'),
+        ('Vegano', 'Vegano'),
+        ('Vegetariano', 'Vegetariano'),
+        ('Sobremesa', 'Sobremesa'),
+        ('Petisco', 'Petisco'),
     ]
 
     nome = models.CharField(max_length=100)

@@ -1,5 +1,7 @@
 {% load static %}
- 
+{% if user.is_authenticated %}
+  <p>Olá, {{ user.username }}!</p>
+{% endif %}
 <h1>{{ receita.nome }}</h1>
 <p><strong>Categoria:</strong> {{ receita.categoria }}</p>
 <p><strong>Ingredientes:</strong><br>{{ receita.ingredientes|linebreaks }}</p>
