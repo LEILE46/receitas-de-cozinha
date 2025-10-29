@@ -19,8 +19,16 @@ def listar_receitas(request):
 
 def detalhe_receita(request, id):
     receita = get_object_or_404(Receita, id=id)
-    return render(request, 'detalhes.html', {'receita': receita})
-
+ 
+    if request.method == 'POST':
+        form = ReceitaForm(request.POST, request.FILES, instance=receita)
+        if form.is_valid():
+            form.save()
+            return redirect('receitas:detalhe', id=receita.id)
+    else:
+        form = ReceitaForm(instance=receita)
+ 
+    return render(request, 'detalhes.html', {'receita': receita, 'form': form})
 def nova_receita(request):
     if request.method == 'POST':
         form = ReceitaForm(request.POST, request.FILES)
